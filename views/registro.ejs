@@ -275,14 +275,25 @@
             <input type="text" name="ciudad">
         </p>
         <p>
-            <label for="password">Password</label> <br>
-            <input type="password" name="password">
+            <label for="password">Contraseña</label> <br>
+            <input type="text" name="password">
+        </p>
+        <p>
+            <label for="rePassword">Repite la contraseña</label> <br>
+            <input type="text" name="rePassword">
         </p>
         <p>
             <input type="submit">
         </p>
         
     </form>
-
-
+    <% if (errors) { %>
+    <div>
+        <ul>
+            <% for( let i = 0 ; i < errors.length; i++) { %>
+            <li> <%= errors[i].msg %></li>
+            <% } %>
+        </ul>
+    </div>
+    <% } %>
     <%- include('./layout/footer') %>
