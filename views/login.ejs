@@ -1,0 +1,14 @@
+<%- include('./layout/header') %>
+<%- include('./partials/nav') %>
+<h1>login</h1>
+<form action="/login" method="post">
+    <p>
+        <label for="usuario">Usuario</label><br>
+        <input type="text" name="usuario" placeholder="Introduce usuario o email">  
+    </p>
+    <p>
+        <label for="password">Contraseña</label><br>
+        <input type="text" name="password">
+    </p>
+    <p><input type="submit"></p>
+<%- include('./layout/footer') %>
