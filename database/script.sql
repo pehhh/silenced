@@ -14,12 +14,13 @@ CREATE TABLE usuarios(
     CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE opiniones(
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_opinion INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(150),
     opinion VARCHAR(1000),
     plataforma VARCHAR(150),
-    FOREIGN KEY(id) REFERENCES usuarios(id),
+    id_usuario INT,
+    FOREIGN KEY(id_usuario) REFERENCES usuarios(id),
     CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-alter table usuarios drip index usuario;
+alter table usuarios dp index usuario;

@@ -1,0 +1,40 @@
+<%- include('./layout/header') %>
+    
+    <h1>Perfil</h1>
+    <h2>Editar perfil</h2>
+    <a href="/editarPerfil/<%= usuario %>">Editar perfil</a>
+    <a href="/editarPassword/<%= usuario %>">Editar contraseña</a>
+    <form action="/insertar" method="post">
+        <p>
+            <label for="titulo">Titulo</label> <br>
+            <input type="text" name="titulo">
+        </p>
+        <p>
+            <label for="opinion">Opinion borrada</label> <br>
+            <textarea name="opinion"  cols="30" rows="10"></textarea>
+            
+        </p>
+        <p>
+            <label for="plataforma">Plataforma</label> <br>
+            <input type="text" name="plataforma">
+        </p>
+        
+        <p>
+            <input type="submit">
+        </p>
+    </form>
+    
+    <h2>Opiniones</h2>
+    <% if(data.length > 0) { %>
+        <% for ( let i= 0; i < data.length; i++) { %>
+            <h3> <%= data[i].titulo %> </h3>
+            <h4> <%= data[i].plataforma %> </h4>
+            <p> <%= data[i].opinion %> </p>
+            <h5> <%= data[i].CREATED_AT %> </h5>
+            <a href="/editar/<%= data[i].id_opinion %>">Editar</a>
+            <a href="/borrar/<%= data[i].id_opinion %>">Borrar</a>
+        <% } %>
+    <% }else{ %>
+        <h3>No tienes opiniones, escribe la primera</h3>
+    <% } %>
+<%- include('./layout/footer') %>

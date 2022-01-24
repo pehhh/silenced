@@ -1,0 +1,23 @@
+<%- include('./layout/header.ejs') %>
+<h1>Editar</h1>
+<form action="/editar/<%= data.id_opinion %>" method="post">
+    <p>
+        <label for="titulo">Titulo</label> <br>
+        <input type="text" name="titulo" value="<%= data.titulo %>">
+    </p>
+    <p>
+        <label for="opinion">Opinion borrada</label> <br>
+        <textarea name="opinion"  cols="30" rows="10" ><%= data.opinion %></textarea>
+        
+    </p>
+    <p>
+        <label for="plataforma">Plataforma</label> <br>
+        <input type="text" name="plataforma" value="<%= data.plataforma%>">
+    </p>
+    
+    <p>
+        <input type="submit">
+    </p>
+</form>
+
+<%- include('./layout/footer.ejs') %>

@@ -1,4 +1,16 @@
 <%- include('./layout/header') %>
 <%- include('./partials/nav') %>
-  <h1>hola</h1>
+  <h1>ultimas opiniones</h1>
+  <% if(data.length > 0) { %>
+    <% for ( let i= 0; i < data.length; i++) { %>
+        <h3> <%= data[i].titulo %> </h3>
+        <h4><%= data[i].usuario %> </h4>
+        <h4> <%= data[i].plataforma %> </h4>
+        <p> <%= data[i].opinion %> </p>
+        <h5> <%= data[i].CREATED_AT %> </h5>
+        
+    <% } %>
+<% }else{ %>
+    <h3>No tienes opiniones, escribe la primera</h3>
+<% } %>
 <%- include('./layout/footer') %>

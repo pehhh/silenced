@@ -15,15 +15,16 @@ const conn= mysql.createConnection({
 conn.query=promisify(conn.query)
 /* bcrypt */
 /* encritado */
+const encriptado={}
 
-const encriptar=async(password)=>{
+encriptado.encriptar=async(password)=>{
     const salt= await bcrypt.genSalt(10)
     const hash= await bcrypt.hash(password,salt)
     return hash
 }
 /* comparar constraseñas */
 
-const comparar= async(password, passwordGuardada)=>{
+encriptado.comparar= async(password, passwordGuardada)=>{
     try{
         const resultComp = await bcrypt.compare(password,passwordGuardada)
         return resultComp
@@ -50,7 +51,7 @@ passport.use('registro', new Strategy({
         password:password
     }
     console.log(newUser)
-    newUser.password=await encriptar(password)
+    newUser.password=await encriptado.encriptar(password)
     const result= await conn.query('INSERT INTO usuarios SET ?', [newUser])
     newUser.id=result.insertId
     done(null,newUser)
@@ -63,7 +64,7 @@ passport.use('login', new Strategy({
     const result = await conn.query('SELECT * FROM usuarios WHERE usuario=?',[username])
     if(result.length>0){
         const user= result[0]
-        const resultComp= comparar(password,user.password)
+        const resultComp= encriptado.comparar(password,user.password)
         if(resultComp){
             done(null,user)
         }else{
@@ -82,3 +83,5 @@ passport.deserializeUser( async(id,done)=>{
 
     done(null,result[0])
 })
+
+module.exports=encriptado
