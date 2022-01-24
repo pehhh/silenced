@@ -13,15 +13,11 @@ const encriptado = require('../helpers/passportBcrypt')
 /* index */
 router.get('/',async (req, res, next) => {
   await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario', [req.user.id], (err, result) => {
-
     console.log(result)
     res.render('index', {
       data: result,
-      
     })
-
   })
-  
 });
 
 /* registro */
