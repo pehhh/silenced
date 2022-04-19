@@ -1,0 +1,30 @@
+<%- include('./layout/header') %>
+<%- include('./partials/nav') %>
+<h1>graficas</h1>
+<div style="width: 100px; height: 100px;">
+    <canvas id="grafica" width="600" height="600"></canvas>
+</div>
+<script>
+    document.write("hola mundo en el navegador")
+</script>
+<script> 
+    import result from '../routes/index.js'
+    let miCanvas=document.getElementById("grafica").getContext("2d")
+    var chart= new Chart(miCanvas,{
+        type:"line",
+        data:{
+            labels:["vino","tequila","cerveza"],
+            datasets:[
+                {
+                    label:"mi grafica bebidas",
+                    backgroundColor:"rgb(0,0,0)",
+                    borderColor:"rgb(255,255,0)",
+                    data:result
+                }
+            ]
+        }
+    })
+    document.write("hola mundo en el navegador")
+</script>
+
+<%- include('./layout/footer') %>

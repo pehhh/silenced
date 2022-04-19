@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 const mysql = require('mysql')
@@ -10,18 +11,19 @@ const conn = mysql.createConnection({
 })
 const { body, validationResult } = require('express-validator')
 const encriptado = require('../helpers/passportBcrypt')
+const log = require('../helpers/log')
 /* index */
 router.get('/',async (req, res, next) => {
-  await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario', [req.user.id], (err, result) => {
+  await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario', (err, result) => {
     console.log(result)
     res.render('index', {
       data: result,
     })
   })
-});
+})
 
 /* registro */
-router.get('/registro', (req, res, next) => {
+router.get('/registro',log.noLogueado, (req, res, next) => {
   res.render('registro', {
     errors: {}
   })
@@ -55,13 +57,11 @@ router.post('/registro', [
     .isLength({ max: 150 }),
   body('password', 'Debes introducir una contraseña')
     .notEmpty(),
-  body('password', 'Debe contener entre 8 y 25 carácteres')
+  body('password', 'Debe contener entre 4 y 25 carácteres')
     .isLength({ min: 4 })
     .isLength({ max: 25 }),
   body('rePassword', 'Debes repetir la contraseña')
     .notEmpty(),
-
-
 ], async (req, res, next) => {
   const errors = validationResult(req).array()
   if (req.body.password != req.body.rePassword) {
@@ -86,10 +86,10 @@ router.post('/registro', [
       failureRedirect: '/registro'
     })(req, res, next)
   }
-
 })
+
 /* login */
-router.get('/login', (req, res, next) => {
+router.get('/login', log.noLogueado,  (req, res, next) => {
   res.render('login')
 })
 router.post('/login', async (req, res, next) => {
@@ -103,7 +103,7 @@ router.get('/errorLogin', (req, res, next) => {
 })
 /* perfil */
 
-router.get('/perfil', async (req, res, next) => {
+router.get('/perfil', log.logueado ,async (req, res, next) => {
   console.log(req.user.id)
   await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario AND u.id=?', [req.user.id], (err, result) => {
 
@@ -128,7 +128,7 @@ router.get('/perfil', async (req, res, next) => {
   })
 })
 
-router.get('/editar/:id_opinion', async (req, res, next) => {
+router.get('/editar/:id_opinion',log.logueado,  async (req, res, next) => {
   console.log(req.params)
   await conn.query('SELECT * FROM opiniones WHERE id_opinion=? ', req.params.id_opinion, (err, result) => {
     console.log(result)
@@ -157,7 +157,7 @@ router.post('/editar/:id_opinion', async (req, res, next) => {
 
   })
 })
-router.get('/borrar/:id_opinion', (req, res, next) => {
+router.get('/borrar/:id_opinion',log.logueado , (req, res, next) => {
   conn.query('DELETE FROM opiniones WHERE id_opinion=?', [req.params.id_opinion], (err, result) => {
     if (err) {
       console.log(err)
@@ -166,7 +166,7 @@ router.get('/borrar/:id_opinion', (req, res, next) => {
     }
   })
 })
-router.get('/editarPerfil/:id', async (req, res, next) => {
+router.get('/editarPerfil/:id',log.logueado , async (req, res, next) => {
   console.log(req.params)
   await conn.query('SELECT * FROM usuarios WHERE id=?', [req.params.id], (err, result) => {
     console.log(result)
@@ -231,7 +231,7 @@ router.post('/editarPerfil/:id', [
     })
   }
 })
-router.get('/editarPassword/:id', async (req, res, next) => {
+router.get('/editarPassword/:id',log.logueado , async (req, res, next) => {
   console.log(req.params)
   await conn.query('SELECT * FROM usuarios WHERE id=?', [req.params.id], (err, result) => {
     console.log(result)
@@ -277,10 +277,18 @@ router.post('/editarPassword/:id', [
   }
 }
 )
+router.get('/logout',(req,res,next)=>{
+  req.logout()
+  res.redirect('/')
+})
 
+/* grafica */
 
-
-
-
+router.get('/graficas', async (req, res, next) => {
+  const result = await conn.query("SELECT * FROM opiniones ")
+  module.exports=result;
+    res.render('graficas')
+  
+})
 
 module.exports = router;

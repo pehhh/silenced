@@ -32,6 +32,7 @@ encriptado.comparar= async(password, passwordGuardada)=>{
         console.log(e)
     }
 }
+
 /* registro */
 passport.use('registro', new Strategy({
     /* usenameField es lo que que le paso al username en (req,username,password) */
@@ -85,3 +86,4 @@ passport.deserializeUser( async(id,done)=>{
 })
 
 module.exports=encriptado
+

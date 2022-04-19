@@ -1,8 +1,15 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
+/* h1{
+    color: red;
 }
+nav > ul > li{
+    display: inline-block;
+    color: aqua;
+    text-decoration: none;
+}
+nav > ul > li >a{
+    text-decoration: none;
+}
+nav > ul > li >a:hover{
+    background-color: aqua;
+} */
