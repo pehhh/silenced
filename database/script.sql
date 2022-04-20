@@ -1,6 +1,6 @@
-CREATE DATABASE proyectodaw2 charset utf8;
+CREATE DATABASE proyectodaw charset utf8;
 
-USE proyectodaw2;
+USE proyectodaw;
 
 CREATE TABLE usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +19,6 @@ CREATE TABLE opiniones(
     opinion VARCHAR(1000),
     plataforma VARCHAR(150),
     id_usuario INT,
-    imagen LONGBLOB,
     FOREIGN KEY(id_usuario) REFERENCES usuarios(id),
     CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
