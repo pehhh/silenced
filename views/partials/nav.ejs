@@ -1,12 +1,17 @@
 <!-- menú principal -->
-<nav>
-    <h1></h1>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/opiniones">Opiniones</a></li>
-        <li><a href="/graficas">Graficas</a></li>
+<nav class="flexyRow-between">
+    <div class="titulo flexyCol-center">
+        <h2>Silenced</h2>
+    </div>
     
+    <ul class="flexyRow-spacebetween">
+            <li><a href="/">Home</a></li>
+            <li><a href="/opiniones">Opiniones</a></li>
+            <li><a href="/graficas">Graficas</a></li>
+    </ul>  
+  
     <!-- menú registro/login -->
+    <ul class="perfil">
         <% if (user ){ %>
             <!-- solo debe verse al estar logueado -->
             <li><a href="/perfil">Perfil</a></li>
@@ -15,7 +20,8 @@
             <!-- registro y login se ocultan al estar logueado -->
             <li><a href="/registro">Registro</a></li>
             <li><a href="/login">Login</a></li>
-        <% } %> 
+        <% } %>
     </ul>
 </nav>
+<hr>
 

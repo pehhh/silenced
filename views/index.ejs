@@ -1,19 +1,28 @@
 <%- include('./layout/header') %>
 <%- include('./partials/nav') %>
-  <h1>ultimas opiniones</h1>
+<img src="images/kristina-flour-BcjdbyKWquw-unsplash (1).jpg" alt="">
+  <h1>Ultimas opiniones</h1>
+  <hr class="subrayado">
   <% if(data.length > 0) { %>
-    <% for ( let i= 0; i < data.length; i++) { %>
-        <% if(i > data.length -10) { %>
-            
-            <h3> <%= data[i].titulo %> </h3>
-            <h4><%= data[i].usuario %> </h4>
-            <h4> <%= data[i].plataforma %> </h4>
-            <p> <%= data[i].opinion %> </p>
-            <h5> <%= data[i].CREATED_AT %> </h5>
+    <section class="flexyRow-evenly">
+        <% for ( let i= 0; i < data.length; i++) { %>
+            <% if(i > data.length -11) { %>
+                <div class="opinion flexyCol-center">
+                    <h3> <%= data[i].titulo %> </h3>
+                    <h4><%= data[i].usuario %> </h4>
+                    <h4> <%= data[i].plataforma %> </h4>
+                    <h4> <%= data[i].valoracionNegativa %> </h4>
+                    <div class="tamañoOpinion">
+                        <%= data[i].opinion %>
+                    </div>
+                    <h5> <%= data[i].CREATED_AT %> </h5>
+                </div>
+            <% } %>
         <% } %>
-    <% } %>
+    </section>
+    
 <% }else{ %>
-    <h3>No tienes opiniones, escribe la primera</h3>
+    <h3>No hay opiniones, escribe la primera</h3>
 <% } %>
 
 

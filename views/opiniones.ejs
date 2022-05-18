@@ -1,0 +1,48 @@
+<%- include('./layout/header') %>
+<%- include('./partials/nav') %>
+
+  <h1>Opiniones</h1>
+  <hr class="subrayado">
+  <div class="buscador flexyRow-evenly">
+    <form action="/buscarUsuario" method="post">
+        <p>
+            <label for="buscador">Buscador por usuario</label> <br>
+            <input type="text" name="usuario" class="campo">
+            <input type="submit" name="buscador"  value="Buscar" class="boton">
+        </p>
+      </form>
+      <form action="/buscarPlataforma" method="post">
+        <p>
+            <label for="buscador">Buscador por plataforma</label> <br>
+            <input type="text" name="plataforma" class="campo">
+            <input type="submit" name="buscador" value="Buscar" class="boton">
+        </p>
+      </form>
+  </div>
+  
+
+  
+  <% if(data.length > 0) { %>
+    <section class="flexyRow-evenly">
+        <% for ( let i= 0; i < data.length; i++) { %>
+            
+                <div class="opinion flexyCol-center">
+                    <h3> <%= data[i].titulo %> </h3>
+                    <h4><%= data[i].usuario %> </h4>
+                    <h4> <%= data[i].plataforma %> </h4>
+                    <h4> <%= data[i].valoracionNegativa %> </h4>
+                    <div class="tamañoOpinion">
+                        <%= data[i].opinion %>
+                    </div>
+                    <h5> <%= data[i].CREATED_AT %> </h5>
+                </div>
+            
+        <% } %>
+    </section>
+    
+<% }else{ %>
+    <h3>No hay opiniones que mostrar</h3>
+<% } %>
+
+
+<%- include('./layout/footer') %>

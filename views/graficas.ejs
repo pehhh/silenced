@@ -1,30 +1,85 @@
 <%- include('./layout/header') %>
-<%- include('./partials/nav') %>
-<h1>graficas</h1>
-<div style="width: 100px; height: 100px;">
-    <canvas id="grafica" width="600" height="600"></canvas>
-</div>
-<script>
-    document.write("hola mundo en el navegador")
-</script>
-<script> 
-    import result from '../routes/index.js'
-    let miCanvas=document.getElementById("grafica").getContext("2d")
-    var chart= new Chart(miCanvas,{
-        type:"line",
-        data:{
-            labels:["vino","tequila","cerveza"],
-            datasets:[
-                {
-                    label:"mi grafica bebidas",
-                    backgroundColor:"rgb(0,0,0)",
-                    borderColor:"rgb(255,255,0)",
-                    data:result
-                }
-            ]
-        }
-    })
-    document.write("hola mundo en el navegador")
-</script>
+    <%- include('./partials/nav') %>
+        <h1>Graficas</h1>
+        <hr class="subrayado">
+        <div id="app">
 
-<%- include('./layout/footer') %>
+        </div>
+        
+
+
+        
+        <ul class="botonGraficas flexyRow-evenly">
+            <li><button class="boton"> <a href="/amazon">amazon</a></button></li>
+            <li><button class="boton"><a href="/tripadvisor">tripadvisor</a></button></li>
+            <li><button class="boton"><a href="/google">google</a></button></li>
+            <li><button class="boton"><a href="/aliexpress">aliexpress</a></button></li>
+            <li><button class="boton"><a href="/trivago">trivago</a></button></li>
+        </ul>
+
+        
+            <div class="myChartDiv">
+                <canvas id="myChart" width="600" height="400" "></canvas>
+            </div>
+        
+
+
+        <script>
+            let fecha2 = [];
+            let data2 = [];
+            let arrSuma = []
+            let suma = 0
+            const data = "<%= data.arrOpiniones %>".split(',')
+            console.log("dataaaaaaaaaaaaaaaaaaa", data)
+            let fecha = "<%= data.arrFechas %>".split(',')
+            //fecha = "<%= data.arrFechas %>".split(' G')
+            if (data.length > 0) {
+                console.log("dataaaaaaaaaaaaaaaaaaa", fecha)
+                for (let i = 0; i < fecha.length; i++) {
+                    fecha2.push(fecha[i].substring(0, 25))
+                }
+                console.log('fecha22222', fecha2)
+                for (const dato of data) {
+                    if (dato != null) {
+                        typeof (dato)
+                        let n = parseInt(dato)
+                        suma += n
+                        arrSuma.push(suma)
+                    }
+
+                    console.log('arrsuma', arrSuma)
+                }
+
+                console.log(data2)
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: fecha2,
+                        datasets: [
+                            {
+                                label: "# of Votes",
+                                data: arrSuma
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                ticks: {
+                                    beginAtZero: true,
+                                    
+                                }
+                            }
+                        }
+                    }
+                })
+            }else{
+                const para = document.createElement("h2");
+                para.innerHTML="NO HAY CRITICAS SOBRE ESTA PLATAFORMA"
+                document.body.appendChild(para);
+                
+            }
+        </script>
+
+        <%- include('./layout/footer') %>

@@ -3,6 +3,10 @@ var express = require('express');
 var router = express.Router();
 const mysql = require('mysql')
 const passport = require('passport')
+const cloudinary= require('cloudinary').v2
+const multer=require('multer')
+const upload=multer({dest:'uploads/'})
+
 const conn = mysql.createConnection({
   localhost: 'host',
   user: 'root',
@@ -114,8 +118,9 @@ router.get('/perfil', log.logueado ,async (req, res, next) => {
     })
 
   })
-  router.post('/insertar', async (req, res, next) => {
-    console.log(req.body)
+  
+  router.post('/insertar',async (req, res, next) => {
+    console.log('reqbodododododododod',req.body)
     const user = req.body
     user.id_usuario = req.user.id
     await conn.query('INSERT INTO opiniones SET ?', [req.body], (err, result) => {
@@ -125,6 +130,7 @@ router.get('/perfil', log.logueado ,async (req, res, next) => {
         res.redirect('/perfil')
       }
     })
+    
   })
 })
 
@@ -285,10 +291,139 @@ router.get('/logout',(req,res,next)=>{
 /* grafica */
 
 router.get('/graficas', async (req, res, next) => {
-  const result = await conn.query("SELECT * FROM opiniones ")
-  module.exports=result;
-    res.render('graficas')
-  
+  await conn.query('SELECT * FROM opiniones', (err, result) => {
+    console.log('result===============================================',result)
+    const arrOpiniones= result.map(result=>result.valoracionNegativa).join(',')
+    console.log(arrOpiniones)
+    const arrFechas= result.map(result=>result.CREATED_AT).join(',')
+    console.log(arrOpiniones)
+    res.render('graficas', {
+      data: {
+        arrOpiniones,
+        arrFechas
+      },
+    })
+  }) 
+})
+router.get('/amazon', async (req, res, next) => {
+  await conn.query('SELECT * FROM opiniones WHERE plataforma="amazon"', (err, result) => {
+    console.log('result===============================================',result)
+    const arrOpiniones= result.map(result=>result.valoracionNegativa).join(',')
+    console.log(arrOpiniones)
+    const arrFechas= result.map(result=>result.CREATED_AT).join(',')
+    console.log(arrOpiniones)
+    res.render('graficas', {
+      data: {
+        arrOpiniones,
+        arrFechas
+      },
+    })
+  }) 
+})
+router.get('/tripadvisor', async (req, res, next) => {
+  await conn.query('SELECT * FROM opiniones WHERE plataforma="tripadvisor"', (err, result) => {
+    console.log('result===============================================',result)
+    const arrOpiniones= result.map(result=>result.valoracionNegativa).join(',')
+    console.log(arrOpiniones)
+    const arrFechas= result.map(result=>result.CREATED_AT).join(',')
+    console.log(arrOpiniones)
+    res.render('graficas', {
+      data: {
+        arrOpiniones,
+        arrFechas
+      },
+    })
+  }) 
+})
+router.get('/google', async (req, res, next) => {
+  await conn.query('SELECT * FROM opiniones WHERE plataforma="google"', (err, result) => {
+    console.log('result===============================================',result)
+    const arrOpiniones= result.map(result=>result.valoracionNegativa).join(',')
+    console.log(arrOpiniones)
+    const arrFechas= result.map(result=>result.CREATED_AT).join(',')
+    console.log(arrOpiniones)
+    res.render('graficas', {
+      data: {
+        arrOpiniones,
+        arrFechas
+      },
+    })
+  }) 
+})
+router.get('/aliexpress', async (req, res, next) => {
+  await conn.query('SELECT * FROM opiniones WHERE plataforma="aliexpress"', (err, result) => {
+    console.log('result===============================================',result)
+    const arrOpiniones= result.map(result=>result.valoracionNegativa).join(',')
+    console.log(arrOpiniones)
+    const arrFechas= result.map(result=>result.CREATED_AT).join(',')
+    console.log(arrOpiniones)
+    res.render('graficas', {
+      data: {
+        arrOpiniones,
+        arrFechas
+      },
+    })
+  }) 
+})
+router.get('/trivago', async (req, res, next) => {
+  await conn.query('SELECT * FROM opiniones WHERE plataforma="trivago"', (err, result) => {
+    console.log('result===============================================',result)
+    const arrOpiniones= result.map(result=>result.valoracionNegativa).join(',')
+    console.log(arrOpiniones)
+    const arrFechas= result.map(result=>result.CREATED_AT).join(',')
+    console.log(arrOpiniones)
+    res.render('graficas', {
+      data: {
+        arrOpiniones,
+        arrFechas
+      },
+    })
+  }) 
+})
+router.get('/booking', async (req, res, next) => {
+  await conn.query('SELECT * FROM opiniones WHERE plataforma="booking"', (err, result) => {
+    console.log('result===============================================',result)
+    const arrOpiniones= result.map(result=>result.valoracionNegativa).join(',')
+    console.log(arrOpiniones)
+    const arrFechas= result.map(result=>result.CREATED_AT).join(',')
+    console.log(arrOpiniones)
+    res.render('graficas', {
+      data: {
+        arrOpiniones,
+        arrFechas
+      },
+    })
+  }) 
+})
+/* opiniones */
+router.get('/opiniones',async (req, res, next) => {
+  console.log('reqbody',req.body)
+  await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario', (err, result) => {
+    console.log('result',result)
+    res.render('opiniones', {
+      data: result,
+    })
+  })
 })
 
+/* buscador por usuario */
+
+router.post('/buscarUsuario',async (req, res, next) => {
+  await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario AND usuario=?',[req.body.usuario], (err, result) => {
+    console.log(result)
+    res.render('opiniones', {
+      data: result,
+    })
+  })
+})
+/* buscador por plataforma */
+
+router.post('/buscarPlataforma',async (req, res, next) => {
+  await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario AND plataforma=?',[req.body.plataforma], (err, result) => {
+    console.log(result)
+    res.render('opiniones', {
+      data: result,
+    })
+  })
+})
 module.exports = router;

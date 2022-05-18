@@ -4,37 +4,52 @@
     <h2>Editar perfil</h2>
     <a href="/editarPerfil/<%= usuario %>">Editar perfil</a>
     <a href="/editarPassword/<%= usuario %>">Editar contraseña</a>
-    <form action="/insertar" method="post">
+    <form action="/insertar" method="post" >
         <p>
             <label for="titulo">Titulo</label> <br>
-            <input type="text" name="titulo">
+            <input type="text" name="titulo" required>
         </p>
         <p>
             <label for="opinion">Opinion borrada</label> <br>
-            <textarea name="opinion"  cols="30" rows="10"></textarea>
+            <textarea name="opinion"  cols="30" rows="10" minlength="4" maxlength="300" required></textarea>
             
         </p>
         <p>
             <label for="plataforma">Plataforma</label> <br>
-            <input type="text" name="plataforma">
+            <select id="country" name="plataforma" required> <br>
+                <option value="amazon">Amazon</option>
+                <option value="tripadvisor">Tripadvisor</option>
+                <option value="google">Google</option>
+                <option value="aliexpress">Aliexpress</option>
+                <option value="trivago">Trivago</option>
+                <option value="booking">Booking</option>
+            </select>
         </p>
-        
-            
+        <p>
+            <label for="valoracionNegativa">valoracionNegativa</label> <br>
+            <input type="text" name="valoracionNegativa" required>
+        </p>
         <p>
             <input type="submit">
         </p>
+      
     </form>
     
     <h2>Opiniones</h2>
     <% if(data.length > 0) { %>
         <% for ( let i= 0; i < data.length; i++) { %>
+            <div class="opinion">
+                <h3> <%= data[i].titulo %> </h3>
+                <h4> <%= data[i].plataforma %> </h4>
+                <h4> <%= data[i].valoracionNegativa %> </h4>
+                <div class="tamañoOpinion">
+                    <%= data[i].opinion %>
+                </div>
+                <h5> <%= data[i].CREATED_AT %> </h5>
+                <a href="/editar/<%= data[i].id_opinion %>">Editar</a>
+                <a href="/borrar/<%= data[i].id_opinion %>">Borrar</a>
+            </div>
             
-            <h3> <%= data[i].titulo %> </h3>
-            <h4> <%= data[i].plataforma %> </h4>
-            <p> <%= data[i].opinion %> </p>
-            <h5> <%= data[i].CREATED_AT %> </h5>
-            <a href="/editar/<%= data[i].id_opinion %>">Editar</a>
-            <a href="/borrar/<%= data[i].id_opinion %>">Borrar</a>
         <% } %>
     <% }else{ %>
         <h3>No tienes opiniones, escribe la primera</h3>
