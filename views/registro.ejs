@@ -1,27 +1,29 @@
 <%- include('./layout/header') %>
 <%- include('./partials/nav') %>
-    <form action="/registro" method="post">
+<h1>Registro</h1>
+<hr class="subrayado">
+    <form action="/registro" method="post" class="log flexyCol-center">
         <p>
             <label for="usuario">Usuario</label><br>
-            <input type="text" name="usuario">  
+            <input type="text" name="usuario" class="campo">  
         </p>
         <p>
             <label for="nombre">Nombre</label><br>
-            <input type="text" name="nombre">
+            <input type="text" name="nombre" class="campo">
         </p>
         <p>
             <label for="apellidos">Apellidos</label><br>
-            <input type="text" name="apellidos">
+            <input type="text" name="apellidos" class="campo">
         </p>
         <p>
             <label for="email">Email</label><br>
-            <input type="text" name="email">
+            <input type="text" name="email" class="campo">
         </p>
         <p>
 
         
         <label for="pais">Pais</label><br>
-        <select id="country" name="pais"> <br>
+        <select id="country" name="pais" class="campo"> <br>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Åland Islands">Åland Islands</option>
             <option value="Albania">Albania</option>
@@ -272,19 +274,19 @@
         </p>
         <p>
             <label for="ciudad">Ciudad</label> <br>
-            <input type="text" name="ciudad">
+            <input type="text" name="ciudad" class="campo">
         </p>
         <p>
             <label for="password">Contraseña</label> <br>
-            <input type="text" name="password">
+            <input type="text" name="password" class="campo">
         </p>
         <p>
             <label for="rePassword">Repite la contraseña</label> <br>
-            <input type="text" name="rePassword">
+            <input type="text" name="rePassword" class="campo">
         </p>
         
         <p>
-            <input type="submit">
+            <input type="submit" class="boton" value="Registrate">
         </p>
         <% if (errors) { %>
             <div>

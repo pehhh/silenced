@@ -18,6 +18,10 @@ body{
 h1 {
     color: #EF43CF;
 }
+h2{
+    color: #EF43CF;
+    
+}
 .titulo{
     height: 60px; 
     background-color: #EF43CF;
@@ -30,7 +34,7 @@ nav{
     
     
 }
-h2{
+.silenced{
     background-color: #EF43CF;
     color: white;
     font-size: 30px;
@@ -138,7 +142,7 @@ footer>ul>li{
     margin-left: auto;
     margin-right: auto;
     border-radius: 30px;
-    height: 100px;
+    
 }
 
 .tamañoOpinion{
@@ -234,13 +238,34 @@ label{
     margin: 15px;
     
 }
-
+.botonPeq{
+    border-radius: 20px;
+    color: white;
+    background-color: #1C7872;
+    height: 40px;
+    width: 80px;
+    margin: 15px;
+    
+}
+button>a{
+    text-decoration: none;
+}
+.log{
+    border: 3px solid white;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-bottom: 50px;
+    padding: 30px;
+}
 .autor{
     margin-top: 40px;
 }
 nav>ul>li>a{
     margin-right: 22px;
 }
+
 /* flex */
 
  .flexyRow-between {

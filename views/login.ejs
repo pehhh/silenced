@@ -1,14 +1,16 @@
 <%- include('./layout/header') %>
 <%- include('./partials/nav') %>
-<h1>login</h1>
-<form action="/login" method="post">
+<h1>Login</h1>
+<hr class="subrayado">
+<form action="/login" method="post" class="log flexyCol-center">
     <p>
         <label for="usuario">Usuario</label><br>
-        <input type="text" name="usuario" placeholder="Introduce usuario o email">  
+        <input type="text" name="usuario" placeholder="Introduce usuario o email" class="campo">  
     </p>
     <p>
         <label for="password">Contraseña</label><br>
-        <input type="text" name="password">
+        <input type="text" name="password" class="campo">
     </p>
-    <p><input type="submit"></p>
+    <p><input type="submit" class="boton"></p>
+</form>  
 <%- include('./layout/footer') %>
