@@ -77,6 +77,10 @@ hr{
     
 }
 
+placeholder{
+    margin-left: 5px;
+}
+
 /*redes sociales*/
 .redes>ul > li {
     display: inline-block;
@@ -226,6 +230,13 @@ h1{
     height: 30px;
     
 }
+.area{
+    width: 250px;
+    border-radius: 20px;
+    height: 200px;
+    
+    
+}
 label{
     margin-left: 10px;
 }
@@ -246,6 +257,9 @@ label{
     width: 80px;
     margin: 15px;
     
+}
+a{
+    color: white;
 }
 button>a{
     text-decoration: none;
