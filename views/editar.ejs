@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="./stylesheets/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,800;0,900;1,200;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,800;0,900;1,200;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Beth+Ellen&family=Homemade+Apple&family=Kristi&family=Reenie+Beanie&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js"></script>
   <title>Document</title>
+  <style>
+      h1{
+          color: red;
+      }
+  </style>
 </head>
+
 <body>
+<%- include('./partials/nav') %>
 <h1>Editar</h1>
 <form action="/editar/<%= data.id_opinion %>" method="post">
     <p>
@@ -43,13 +58,4 @@
     </p>
 </form>
 
-<footer>
-    <ul>
-        <!-- redes sociales -->
-        <li><a href="/registro">Facebook</a></li>
-        <li><a href="/login">Instagram</a></li>
-        <li><a href="/perfil">youtube</a></li>
-    </ul>
-</footer>
-</body>
-</html>
+<%- include('./layout/footer') %>

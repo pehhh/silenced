@@ -20,9 +20,6 @@
       </form>
       <button class="boton"><a href="/opiniones">Deshacer</a></button>
   </div>
-  
-
-  
   <% if(data.length > 0) { %>
     <section class="flexyRow-evenly">
         <% for ( let i= 0; i < data.length; i++) { %>
@@ -42,7 +39,7 @@
     </section>
     
 <% }else{ %>
-    <h3>No hay opiniones que mostrar</h3>
+    <h2 class="noOpinion">No hay opiniones que mostrar</h2>
 <% } %>
 
 

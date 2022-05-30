@@ -17,17 +17,17 @@ body {
 }
 
 h1 {
-    color: #ef4393;
+    color: #EF43CF;
 }
 
 h2 {
-    color: #ef4393;
+    color: #EF43CF;
 
 }
 
 .titulo {
     height: 60px;
-    background-color: #ef4393;
+    background-color: #EF43CF;
     margin-left: 30px;
     padding: 0px 30px 0px 30px;
 }
@@ -35,13 +35,12 @@ h2 {
 nav {
     background: var(--back);
     width: 100%;
-    
 
 
 }
 
 .silenced {
-    background-color: #ef4393;
+    background-color: #EF43CF;
     color: white;
     height: 50px;
     font-size: 30px;
@@ -324,16 +323,6 @@ button>a {
     margin-right: auto;
     width: 40%;
     margin-bottom: 50px;
-    padding: 30px;
-}
-.log2 {
-    border: 3px solid white;
-    border-radius: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-    margin-bottom: 150px;
-    margin-bottom: 150px;
     padding: 30px;
 }
 

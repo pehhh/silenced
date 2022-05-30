@@ -86,7 +86,7 @@ router.post('/registro', [
     })
   } else {
     await passport.authenticate('registro', {
-      successRedirect: '/',
+      successRedirect: '/perfil',
       failureRedirect: '/registro'
     })(req, res, next)
   }
@@ -259,9 +259,11 @@ router.post('/editarPassword/:id', [
     .notEmpty(),
 ], async (req, res, next) => {
   const errors = validationResult(req).array()
-  const usuario = await conn.query('SELECT * FROM usuarios WHERE id=?', [req.body.id])
+  const usuario = await conn.query('SELECT * FROM usuarios WHERE id=?', [req.params.id])
+  console.log("params",req.params.id)
+  console.log("usuario",usuario)
   const contraseña = await encriptado.comparar(req.body.password, usuario.password)
-
+console.log("usuario password",usuario.password)
   if (!contraseña) {
     errors.push({ msg: 'La constraseña actual no es correcta' })
 
