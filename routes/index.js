@@ -1,4 +1,4 @@
-
+/* importaciones */
 var express = require('express');
 var router = express.Router();
 const mysql = require('mysql')
@@ -7,15 +7,16 @@ const cloudinary= require('cloudinary').v2
 const multer=require('multer')
 const upload=multer({dest:'uploads/'})
 
+const { body, validationResult } = require('express-validator')
+const encriptado = require('../helpers/passportBcrypt')
+const log = require('../helpers/log')
+/* conexion bbdd */
 const conn = mysql.createConnection({
   localhost: 'host',
   user: 'root',
   password: 'password',
   database: 'proyectodaw'
 })
-const { body, validationResult } = require('express-validator')
-const encriptado = require('../helpers/passportBcrypt')
-const log = require('../helpers/log')
 /* index */
 router.get('/',async (req, res, next) => {
   await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario', (err, result) => {
@@ -105,6 +106,7 @@ router.post('/login', async (req, res, next) => {
 router.get('/errorLogin', (req, res, next) => {
   res.render('error_registro_login/errorLogin')
 })
+
 /* perfil */
 
 router.get('/perfil', log.logueado ,async (req, res, next) => {
@@ -118,8 +120,8 @@ router.get('/perfil', log.logueado ,async (req, res, next) => {
     })
 
   })
-  
-  router.post('/insertar',async (req, res, next) => {
+/* insertar opinion */ 
+router.post('/insertar',async (req, res, next) => {
     console.log('reqbodododododododod',req.body)
     const user = req.body
     user.id_usuario = req.user.id
@@ -133,7 +135,7 @@ router.get('/perfil', log.logueado ,async (req, res, next) => {
     
   })
 })
-
+/* editar opinion */
 router.get('/editar/:id_opinion',log.logueado,  async (req, res, next) => {
   console.log(req.params)
   await conn.query('SELECT * FROM opiniones WHERE id_opinion=? ', req.params.id_opinion, (err, result) => {
@@ -163,6 +165,7 @@ router.post('/editar/:id_opinion', async (req, res, next) => {
 
   })
 })
+/* borrar opinion */
 router.get('/borrar/:id_opinion',log.logueado , (req, res, next) => {
   conn.query('DELETE FROM opiniones WHERE id_opinion=?', [req.params.id_opinion], (err, result) => {
     if (err) {
@@ -172,6 +175,7 @@ router.get('/borrar/:id_opinion',log.logueado , (req, res, next) => {
     }
   })
 })
+/* editar perfil */
 router.get('/editarPerfil/:id',log.logueado , async (req, res, next) => {
   console.log(req.params)
   await conn.query('SELECT * FROM usuarios WHERE id=?', [req.params.id], (err, result) => {
@@ -237,60 +241,13 @@ router.post('/editarPerfil/:id', [
     })
   }
 })
-router.get('/editarPassword/:id',log.logueado , async (req, res, next) => {
-  console.log(req.params)
-  await conn.query('SELECT * FROM usuarios WHERE id=?', [req.params.id], (err, result) => {
-    console.log(result)
-    res.render('editarPassword', {
-      data: result[0],
-      errors: {}
-    })
-  })
-})
-router.post('/editarPassword/:id', [
-  body('password', 'Debes introducir tu contraseña actual')
-    .notEmpty(),
-  body('nuevoPassword', 'Debes introducir una nueva contraseña')
-    .notEmpty(),
-  body('nuevoPassword', 'Debe contener entre 8 y 25 carácteres')
-    .isLength({ min: 4 })
-    .isLength({ max: 25 }),
-  body('repeticionNuevoPassword', 'Debes repetir la contraseña')
-    .notEmpty(),
-], async (req, res, next) => {
-  const errors = validationResult(req).array()
-  const usuario = await conn.query('SELECT * FROM usuarios WHERE id=?', [req.params.id])
-  console.log("params",req.params.id)
-  console.log("usuario",usuario)
-  const contraseña = await encriptado.comparar(req.body.password, usuario.password)
-console.log("usuario password",usuario.password)
-  if (!contraseña) {
-    errors.push({ msg: 'La constraseña actual no es correcta' })
 
-  } else if (req.body.nuevoPassword != req.body.repeticionNuevoPassword) {
-    errors.push({ msg: 'Las contraseñas no coinciden' })
-  }
-  if (errors.length > 0) {
-    res.render('editarPassword', {
-      errors: errors,
-      data: usuario
-    })
-  } else {
-
-    const nuevoPassword = await encriptado.encriptar(req.body.nuevoPassword)
-    usuario.password=nuevoPassword
-    conn.query('UPDATE usuarios SET ? WHERE id=?', [usuario, req.params.id], (err, result) => {
-      res.redirect('/perfil')
-    })
-  }
-}
-)
 router.get('/logout',(req,res,next)=>{
   req.logout()
   res.redirect('/')
 })
 
-/* grafica */
+/* graficas */
 
 router.get('/graficas', async (req, res, next) => {
   await conn.query('SELECT * FROM opiniones', (err, result) => {
@@ -307,6 +264,7 @@ router.get('/graficas', async (req, res, next) => {
     })
   }) 
 })
+/* grafica amazon */
 router.get('/amazon', async (req, res, next) => {
   await conn.query('SELECT * FROM opiniones WHERE plataforma="amazon"', (err, result) => {
     console.log('result===============================================',result)
@@ -322,6 +280,7 @@ router.get('/amazon', async (req, res, next) => {
     })
   }) 
 })
+/* grafica tripadvisor */
 router.get('/tripadvisor', async (req, res, next) => {
   await conn.query('SELECT * FROM opiniones WHERE plataforma="tripadvisor"', (err, result) => {
     console.log('result===============================================',result)
@@ -337,6 +296,7 @@ router.get('/tripadvisor', async (req, res, next) => {
     })
   }) 
 })
+/* grafica google */
 router.get('/google', async (req, res, next) => {
   await conn.query('SELECT * FROM opiniones WHERE plataforma="google"', (err, result) => {
     console.log('result===============================================',result)
@@ -352,6 +312,7 @@ router.get('/google', async (req, res, next) => {
     })
   }) 
 })
+/* grafica aliexpress */
 router.get('/aliexpress', async (req, res, next) => {
   await conn.query('SELECT * FROM opiniones WHERE plataforma="aliexpress"', (err, result) => {
     console.log('result===============================================',result)
@@ -367,6 +328,7 @@ router.get('/aliexpress', async (req, res, next) => {
     })
   }) 
 })
+/* grafica trivago */
 router.get('/trivago', async (req, res, next) => {
   await conn.query('SELECT * FROM opiniones WHERE plataforma="trivago"', (err, result) => {
     console.log('result===============================================',result)
@@ -382,6 +344,7 @@ router.get('/trivago', async (req, res, next) => {
     })
   }) 
 })
+/* grafica booking */
 router.get('/booking', async (req, res, next) => {
   await conn.query('SELECT * FROM opiniones WHERE plataforma="booking"', (err, result) => {
     console.log('result===============================================',result)
@@ -397,6 +360,7 @@ router.get('/booking', async (req, res, next) => {
     })
   }) 
 })
+
 /* opiniones */
 router.get('/opiniones',async (req, res, next) => {
   console.log('reqbody',req.body)
@@ -409,7 +373,6 @@ router.get('/opiniones',async (req, res, next) => {
 })
 
 /* buscador por usuario */
-
 router.post('/buscarUsuario',async (req, res, next) => {
   await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario AND usuario=?',[req.body.usuario], (err, result) => {
     console.log(result)
@@ -418,8 +381,8 @@ router.post('/buscarUsuario',async (req, res, next) => {
     })
   })
 })
-/* buscador por plataforma */
 
+/* buscador por plataforma */
 router.post('/buscarPlataforma',async (req, res, next) => {
   await conn.query('SELECT * FROM usuarios u, opiniones o WHERE u.id=o.id_usuario AND plataforma=?',[req.body.plataforma], (err, result) => {
     console.log(result)

@@ -1,17 +1,15 @@
 <%- include('./layout/header') %>
 <%- include('./partials/nav') %>   
-    <h1>Perfil</h1>
+    <h2>Perfil</h2>
     <hr class="subrayado">
-    <div class="log flexyRow-evenly">
-        
+    <div class="caja flexyRow-evenly">
         <button class="boton"><a href="/editarPerfil/<%= usuario %>">Editar perfil</a></button>
-        <button class="boton"><a href="/editarPassword/<%= usuario %>">Editar contraseña</a></button>
+        
     </div>
-    <div class="log flexyCol-center">
-        <h1>Introducir opinion</h1>
+    <div class="caja flexyCol-center">
+        <h2>Introducir opinion</h2>
         <hr class="subrayado">
         <form action="/insertar" method="post" >
-        
             <p>
                 <label for="titulo">Titulo</label> <br>
                 <input type="text" name="titulo" required class="campo">
@@ -19,7 +17,6 @@
             <p>
                 <label for="opinion">Opinion borrada</label> <br>
                 <textarea name="opinion"  cols="30" rows="10" minlength="4" maxlength="300" required class=" area"></textarea>
-                
             </p>
             <p>
                 <label for="plataforma">Plataforma</label> <br>
@@ -44,7 +41,7 @@
     </div>
     
     
-    <h1>Opiniones introducidas</h1>
+    <h2>Opiniones introducidas</h2>
     <hr class="subrayado">
     <section class="flexyRow-evenly">
         <% if(data.length > 0) { %>
