@@ -40,6 +40,9 @@ h2 {
     margin-left: 30px;
     padding: 0px 30px 0px 30px;
 }
+.titulo>a{
+    text-decoration: none;
+}
 
 /* header-nav */
 nav {
@@ -71,9 +74,10 @@ nav>ul>li>a {
 }
 
 nav>ul>li>a:hover {
-    background-color: var(--color);
+    background-color: white;
     text-decoration: underline;
     cursor: pointer;
+    color: black;
 }
 
 
@@ -246,7 +250,9 @@ footer>ul>li {
     height: 30px;
 
 }
-
+input, .area, select {
+    padding-left: 10px;
+}
 .area {
     width: 250px;
     border-radius: 20px;

@@ -20,28 +20,450 @@
   <script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js"></script>
   <title>Document</title>
   <style>
-      h1{
-          color: red;
-      }
-  </style>
-</head>
+      /* variables */
 
+:root {
+    --back: radial-gradient(83.74% 125.72% at 78.3% 10.6%, #3D225C 39.4%, rgba(61, 34, 92, 0) 85.27%), #1C123B;
+    --white: #ffffff;
+    --color: #ef4393;
+    --backBoton: #1C7872;
+}
+
+/* layout general */
+* {
+    font-family: poppins;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0 auto;
+    box-sizing: border-box;
+    background: var(--back);
+    color: white;
+    font-family: poppins;
+}
+
+/* titulos */
+h1 {
+    color: var(--color);
+    font-size: 1.5em;
+}
+
+h2 {
+    color: var(--color);
+    font-size: 2em;
+    text-align: center;
+
+}
+
+.titulo {
+    height: 60px;
+    background-color: var(--color);
+    margin-left: 30px;
+    padding: 0px 30px 0px 30px;
+}
+
+/* header-nav */
+nav {
+    background: var(--back);
+    width: 100%;
+}
+
+.silenced {
+    background-color: var(--color);
+    color: white;
+    height: 50px;
+    font-size: 30px;
+    /*  font-family: 'Beth Ellen', cursive; */
+    font-family: 'Homemade Apple', cursive;
+    /* font-family: 'Kristi', cursive; */
+    /* font-family: 'Reenie Beanie', cursive; */
+}
+
+nav>ul>li {
+    display: inline-block;
+    color: aqua;
+    text-decoration: none;
+    margin: 0 10px 0 10px;
+}
+
+nav>ul>li>a {
+    text-decoration: none;
+    color: white;
+}
+
+nav>ul>li>a:hover {
+    background-color: var(--color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+nav>ul>li>a {
+    margin-right: 22px;
+}
+
+img {
+    width: 100%;
+    height: 400px;
+    margin-top: -8px;
+    position: relative;
+    z-index: 3;
+    border-bottom: 2px solid white;
+}
+
+hr {
+    margin-top: -2px;
+    position: relative;
+    z-index: 3;
+}
+.subrayado {
+    width: 35%;
+    margin-bottom: 50px;
+
+}
+
+placeholder {
+    margin-left: 5px;
+}
+
+/*redes sociales*/
+.redes>ul>li {
+    display: inline-block;
+    list-style: none;
+    padding: 0.625rem;
+}
+
+.fa-twitter {
+    color: turquoise;
+}
+
+.fa-facebook-f {
+    color: turquoise;
+}
+
+.fa-pinterest {
+    color: red;
+}
+
+.fa-instagram {
+    color: blueviolet;
+}
+
+.fa-google-plus-g {
+    color: red;
+}
+
+/* footer */
+footer {
+    background-color: black;
+    color: white;
+    position: relative;
+    bottom: 0;
+    height: 150px;
+}
+.autor {
+    margin-top: 40px;
+}
+footer>ul>li>a {
+    text-decoration: none;
+    color: white;
+}
+
+footer>ul>li {
+    text-decoration: none;
+    list-style: none;
+}
+/* grafica */
+.myChartDiv {
+    max-width: 600px;
+    max-height: 400px;
+    background-color: white;
+    position: relative;
+    z-index: 3;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 200px;
+    margin-top: 50px;
+}
+
+#myChart {
+    color: white;
+    background-color: white;
+}
+
+
+/* opinion */
+.opinion {
+    border: 3px solid white;
+    border-radius: 30px;
+    width: 300px;
+    margin: 20px;
+    padding: 10px;
+
+}
+.tamañoOpinion {
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.tamañoOpinion:hover {
+    height: 200px;
+
+}
+
+.descript {
+    opacity: 0;
+    width: 150px;
+    border: 4px solid white;
+    border-radius: 10px;
+    padding: 10px;
+
+    height: 50px;
+    margin-top: 25px;
+    position: relative;
+    bottom: 56px;
+    left: 140px;
+    z-index: 99;
+    background-color: black;
+    font-size: 0.6rem;
+}
+
+.descript>div {
+    text-align: justify;
+    text-justify: inter-word;
+    overflow: hidden;
+}
+
+.descript>div>div {
+    width: 18px;
+    height: 18px;
+    transform: rotate(45deg);
+    position: absolute;
+    z-index: -9;
+    background-color: black;
+    border-top: 4px solid white;
+    border-left: 4px solid white;
+    top: -13px;
+    left: 18px;
+}
+
+/* form */
+.buscador {
+    border: 3px solid white;
+    width: 70%;
+    padding: 30px;
+    border-radius: 30px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.campo {
+    width: 250px;
+    border-radius: 20px;
+    height: 30px;
+
+}
+
+.area {
+    width: 250px;
+    border-radius: 20px;
+    height: 200px;
+}
+
+label {
+    margin-left: 10px;
+}
+/* botones */
+.botonGraficas>li {
+    display: inline-block;
+}
+
+.botonGraficas>li>button>a {
+    text-decoration: none;
+    color: white;
+}
+
+.botonGraficas {
+    border: 3px solid white;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+
+}
+
+.boton {
+    border-radius: 20px;
+    color: white;
+    background-color: var(--backBoton);
+    height: 40px;
+    width: 150px;
+    margin: 15px;
+    border: 2px solid white
+}
+
+.boton:hover {
+    border: 5px solid white;
+    cursor: pointer;
+    text-decoration: underline;
+
+
+}
+
+.noOpinion {
+    color: white;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.botonPeq {
+    border-radius: 20px;
+    color: white;
+    background-color: var(--backBoton);
+    height: 40px;
+    width: 80px;
+    margin: 15px;
+}
+
+a {
+    color: white;
+}
+
+button>a {
+    text-decoration: none;
+}
+/* cajas */
+.log {
+    border: 3px solid white;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-bottom: 230px;
+    margin-top: 100px;
+    padding: 80px;
+}
+
+.log2 {
+    border: 3px solid white;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-bottom: 320px;
+    margin-top: 100px;
+    padding: 120px;
+}
+
+.caja {
+    border: 3px solid white;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-bottom: 50px;
+    margin-top: 100px;
+    padding: 30px;
+}
+
+/* media querys */
+@media screen and (max-width: 620px) {
+
+    .caja,
+    .log,
+    .log2 {
+        width: 70%;
+    }
+}
+
+/* flex */
+
+.flexyRow-evenly {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.flexyCol-evenly {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.flexyCol-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.flexyRow-between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.flexyRow-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+</style>
+</head>
 <body>
-<%- include('./partials/nav') %>
-<h2>Editar</h2>
-<form action="/editar/<%= data.id_opinion %>" method="post">
+    <nav class="flexyRow-between">
+        <div class="titulo flexyCol-center">
+            <h1 class="silenced">Silenced</h1>
+        </div>
+        
+        <ul class="flexyRow-spacebetween">
+                <li><a href="/">Home</a></li>
+                <li><a href="/opiniones">Opiniones</a></li>
+                <li><a href="/graficas">Graficas</a></li>
+        </ul>  
+      
+        <!-- menú registro/login -->
+        <ul class="perfil">
+            <% if (user ){ %>
+                <!-- solo debe verse al estar logueado -->
+                <li><a href="/perfil">Perfil</a></li>
+                <li><a href="/logout">Salir</a></li>
+            <% } else { %>
+                <!-- registro y login se ocultan al estar logueado -->
+                <li><a href="/registro">Registro</a></li>
+                <li><a href="/login">Login</a></li>
+            <% } %>
+        </ul>
+    </nav>
+    <hr>
+<h2>Editar opinion</h2>
+<hr class="subrayado">
+<form action="/editar/<%= data.id_opinion %>" method="post" class="flexyCol-center log">
     <p>
         <label for="titulo">Titulo</label> <br>
-        <input type="text" name="titulo" value="<%= data.titulo %>">
+        <input type="text" name="titulo" value="<%= data.titulo %>" class="campo">
     </p>
     <p>
         <label for="opinion">Opinion borrada</label> <br>
-        <textarea name="opinion"  cols="30" rows="10" ><%= data.opinion %></textarea>
+        <textarea name="opinion"  cols="30" rows="10" class="area" ><%= data.opinion %></textarea>
         
     </p>
     <p>
         <label for="plataforma">Plataforma</label> <br>
-        <select id="country" name="plataforma" required> <br>
+        <select id="country" name="plataforma" required class="campo"> <br>
             <option value="amazon">Amazon</option>
             <option value="tripadvisor">Tripadvisor</option>
             <option value="google">Google</option>
@@ -51,11 +473,26 @@
     </p>
     <p>
         <label for="valoracionNegativa">valoracionNegativa</label> <br>
-        <input type="text" name="valoracionNegativa" value="<%= data.valoracionNegativa %>">
+        <input type="text" name="valoracionNegativa" value="<%= data.valoracionNegativa %>" class="campo">
     </p>
     <p>
-        <input type="submit">
+        <input type="submit" class="boton">
     </p>
 </form>
 
-<%- include('./layout/footer') %>
+<footer>
+    <div  class="redes"> 
+        <ul>
+            <li><a href="https://twitter.com" target="blank" > <i class="fab fa-twitter opac"></i></a></li>
+            <li><a href="https://facebook.com" target="blank"><i class="fab fa-facebook-f opac"></i> </a></li>
+            <li><a href="https://pinterest.com" target="blank"><i class="fab fa-pinterest opac"></i> </a></li>
+            <li><a href="https://instagram.com" target="blank"><i class="fab fa-instagram opac"></i></a></li>
+         
+        </ul>
+    </div>
+    <div class="autor flexyRow-center">
+        <h4>Pedro Martinez Bañon ©2022</h4>
+    </div>
+</footer>
+</body>
+</html>

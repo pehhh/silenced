@@ -21,20 +21,25 @@
 
 
         <script>
+            /* variables */
             let fecha2 = [];
             let data2 = [];
             let arrSuma = []
             let suma = 0
+            /* recibimos opiniones y separamos por comas */
             const data = "<%= data.arrOpiniones %>".split(',')
             console.log("dataaaaaaaaaaaaaaaaaaa", data)
+            /* recibimos fechas y separamos por comas */
             let fecha = "<%= data.arrFechas %>".split(',')
-            //fecha = "<%= data.arrFechas %>".split(' G')
+            
             if (data.length > 0) {
                 console.log("dataaaaaaaaaaaaaaaaaaa", fecha)
+                /* recortamos la fecha */
                 for (let i = 0; i < fecha.length; i++) {
                     fecha2.push(fecha[i].substring(0, 25))
                 }
                 console.log('fecha22222', fecha2)
+                /* convertimos dato a entero y le sumamos todos los anteriores, despues lo pusheamos, de esta forma, la grafica es ascendente e incremental */
                 for (const dato of data) {
                     if (dato != null) {
                         typeof (dato)
@@ -51,10 +56,12 @@
                 var myChart = new Chart(ctx, {
                     type: "line",
                     data: {
+                        /* le pasamos la fecha como etiqueta y punto donde dibujar grafica */
                         labels: fecha2,
                         datasets: [
                             {
                                 label: "# of Votes",
+                                /* le pasamos el array incremental */
                                 data: arrSuma
                             }
                         ]
@@ -70,6 +77,7 @@
                         }
                     }
                 })
+                /* si no hay criticas en la bbdd nos muestra esto */
             }else{
                 const para = document.createElement("h2");
                 para.innerHTML="NO HAY CRITICAS SOBRE ESTA PLATAFORMA"
