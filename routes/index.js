@@ -154,6 +154,7 @@ router.post('/editar/:id_opinion', async (req, res, next) => {
     titulo: req.body.titulo,
     opinion: req.body.opinion,
     plataforma: req.body.plataforma,
+    valoracionNegativa: req.body.valoracionNegativa,
     id_usuario: req.user.id
   }
   await conn.query('UPDATE opiniones SET ? WHERE id_opinion=?', [opinion, req.params.id_opinion], (err, result) => {

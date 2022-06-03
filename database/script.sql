@@ -19,8 +19,8 @@ CREATE TABLE opiniones(
     opinion VARCHAR(1000),
     plataforma VARCHAR(150),
     id_usuario INT,
+    valoracionNegativa INT,
     FOREIGN KEY(id_usuario) REFERENCES usuarios(id),
     CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-alter table usuarios dp index usuario;
